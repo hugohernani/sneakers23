@@ -25,6 +25,9 @@ defmodule Sneakers23Web do
   and import those modules here.
   """
 
+  defdelegate notify_product_released(product),
+    to: Sneakers23Web.ProductChannel
+
   def controller do
     quote do
       use Phoenix.Controller, namespace: Sneakers23Web
@@ -67,6 +70,7 @@ defmodule Sneakers23Web do
       import Sneakers23Web.Gettext
     end
   end
+
 
   @doc """
   When used, dispatch to the appropriate controller/view/etc.
