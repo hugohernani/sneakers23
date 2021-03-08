@@ -30,11 +30,16 @@ defmodule Sneakers23.Inventory do
 
   def mark_product_released!(product_id, opts) do
     pid = Keyword.get(opts, :pid, __MODULE__)
+    being_replicated? = Keyword.get(opts, :being_replicated?, false)
 
     %{id: id} = Store.mark_product_released!(product_id)
     {:ok, inventory} = Server.mark_product_released!(pid, id)
-    {:ok, product} = CompleteProduct.get_product_by_id(inventory, id)
-    Sneakers23Web.notify_product_released(product)
+
+    unless being_replicated? do
+      Replication.mark_product_released!(product_id)
+      {:ok, product} = CompleteProduct.get_product_by_id(inventory, id)
+      Sneakers23Web.notify_product_released(product)
+    end
 
     :ok
   end
@@ -43,14 +48,19 @@ defmodule Sneakers23.Inventory do
 
   def item_sold!(item_id, opts) do
     pid = Keyword.get(opts, :pid, __MODULE__)
+    being_replicated? = Keyword.get(opts, :being_replicated?, false)
 
     avail = Store.fetch_availability_for_item(item_id)
     {:ok, old_inv, inv} = Server.set_item_availability(pid, avail)
-    {:ok, old_item} = CompleteProduct.get_item_by_id(old_inv, item_id)
-    {:ok, item} = CompleteProduct.get_item_by_id(inv, item_id)
-    Sneakers23Web.notify_item_stock_change(
-      previous_item: old_item, current_item: item
-    )
+
+    unless being_replicated? do
+      Replication.item_sold!(item_id)
+      {:ok, old_item} = CompleteProduct.get_item_by_id(old_inv, item_id)
+      {:ok, item} = CompleteProduct.get_item_by_id(inv, item_id)
+      Sneakers23Web.notify_item_stock_change(
+        previous_item: old_item, current_item: item
+      )
+    end
 
     :ok
   end
