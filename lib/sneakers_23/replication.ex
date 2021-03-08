@@ -7,7 +7,7 @@ defmodule Sneakers23.Replication do
       start: {Server, :start_link, [opts]}
     }
   end
-
+  
   def mark_product_released!(product_id) do
     broadcast!({:mark_product_released!, product_id})
   end

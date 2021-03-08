@@ -8,7 +8,7 @@ defmodule Sneakers23.Replication.Server do
   end
 
   def init(_opts) do
-    Proenix.PubSub.subscribe(Sneakers23.PubSub, "inventory_replication")
+    Phoenix.PubSub.subscribe(Sneakers23.PubSub, "inventory_replication")
     {:ok, nil}
   end
 

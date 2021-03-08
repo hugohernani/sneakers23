@@ -8,6 +8,7 @@
 #---
 defmodule Sneakers23.Inventory do
   alias __MODULE__.{CompleteProduct, DatabaseLoader, Server, Store}
+  alias Sneakers23.Replication
 
   def child_spec(opts) do
     loader = Keyword.get(opts, :loader, DatabaseLoader)
