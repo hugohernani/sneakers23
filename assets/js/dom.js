@@ -27,7 +27,7 @@ function updateItemLevel(itemId, level){
 
 function removeStockLevelClasses(el){
   Array.from(el.classList).
-    filter((e) => s.startsWith("size-container__entry--level-")).
+    filter((s) => s.startsWith("size-container__entry--level-")).
     forEach((name) => el.classList.remove(name))
 }
 
