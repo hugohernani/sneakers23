@@ -23,7 +23,7 @@ defmodule Sneakers23Web.CartView do
   end
 
   @product_attrs [
-    :brand, :color, :name, :proce_uds, :main_image_url, :released
+    :brand, :color, :name, :price_usd, :main_image_url, :released
   ]
 
   @item_attrs [:id, :size, :sku]

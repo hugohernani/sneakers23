@@ -27,6 +27,10 @@ const cartChannel = Cart.setupCartChannel(productSocket, window.cartId, {
   }
 })
 
+dom.onItemClick((itemId) =>{
+  Cart.addCartItem(cartChannel, itemId)
+})
+
 function setupProductChannel(socket, productId){
   const productChannel = socket.channel(`product:${productId}`)
   productChannel.join()
