@@ -26,5 +26,8 @@ defmodule Sneakers23Web.Router do
     pipe_through :browser
 
     get "/", ProductController, :index
+    get "/checkout", CheckoutController, :show
+    post "/checkout", CheckoutController, :purchase
+    get "/checkout/complete", CheckoutController, :success
   end
 end
