@@ -63,7 +63,7 @@ defmodule Sneakers23.Inventory do
       )
     end
 
-    Sneakers23Web.notify_item_stock_change(item)
+    Sneakers23Web.notify_local_item_stock_change(item)
 
     :ok
   end
