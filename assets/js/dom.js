@@ -1,5 +1,7 @@
 const dom = {}
 
+import { getCartHtml } from './cartRenderer'
+
 function getProductIds(){
   const products = document.querySelectorAll('.product-listing')
   return Array.from(products).map((el) => el.dataset.productId)
@@ -34,5 +36,9 @@ function removeStockLevelClasses(el){
 dom.getProductIds = getProductIds
 dom.replaceProductComingSoon = replaceProductComingSoon
 dom.updateItemLevel = updateItemLevel
+dom.renderCartHtml = (cart) => {
+  const cartContainer = document.getElementById("cart-container")
+  cartContainer.innerHTML = getCartHtml(cart)
+}
 
 export default dom
