@@ -31,6 +31,10 @@ dom.onItemClick((itemId) =>{
   Cart.addCartItem(cartChannel, itemId)
 })
 
+dom.onItemRemoveClick((itemId) => {
+  Cart.removeCartItem(cartChannel, itemId)
+})
+
 function setupProductChannel(socket, productId){
   const productChannel = socket.channel(`product:${productId}`)
   productChannel.join()
