@@ -6,6 +6,9 @@
 # We make no guarantees that this code is fit for any purpose.
 # Visit http://www.pragmaticprogrammer.com/titles/sbsockets for more book information.
 #---
+
+Application.ensure_all_started(:hound)
+
 ExUnit.start()
 # Only change the Sandbox mode to manual once the Inventory process is done loading
 # Otherwise, an error will occur due to how mode changes work.
